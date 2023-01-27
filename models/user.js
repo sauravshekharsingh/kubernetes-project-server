@@ -1,4 +1,6 @@
-const mongoose = require('mongoose');
+/* ------------------------------- User model ------------------------------- */
+
+const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
   {
@@ -21,7 +23,7 @@ const userSchema = new mongoose.Schema(
     friends: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: "User",
       },
     ],
   },
@@ -30,6 +32,6 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;
