@@ -1,5 +1,7 @@
+/* ----------------------------- Home controller ---------------------------- */
+
 home = (req, res) => {
-  res.send('Home Controller');
+  res.send("Home Controller");
 };
 
 module.exports = { home };
