@@ -1,5 +1,7 @@
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+/* -------------------------------- Mongoose -------------------------------- */
+
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 
 dotenv.config();
 
@@ -12,8 +14,8 @@ const options = {
 
 mongoose
   .connect(MONGO_URI, options)
-  .then(() => console.log('Connected to the database.'))
-  .catch((err) => console.log('Error connecting to the database', err));
+  .then(() => console.log("Connected to the database."))
+  .catch((err) => console.log("Error connecting to the database", err));
 
 const db = mongoose.connection;
 
