@@ -1,9 +1,11 @@
-const passport = require('passport');
-var JwtStrategy = require('passport-jwt').Strategy;
-ExtractJwt = require('passport-jwt').ExtractJwt;
-require('dotenv').config();
+/* -------------------------------- Passport -------------------------------- */
 
-const User = require('../models/user');
+const passport = require("passport");
+var JwtStrategy = require("passport-jwt").Strategy;
+ExtractJwt = require("passport-jwt").ExtractJwt;
+require("dotenv").config();
+
+const User = require("../models/user");
 
 var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
