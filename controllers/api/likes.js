@@ -1,6 +1,8 @@
-const Post = require('../../models/post');
-const Like = require('../../models/like');
-const Comment = require('../../models/comment');
+/* ---------------------------- Likes controller ---------------------------- */
+
+const Post = require("../../models/post");
+const Like = require("../../models/like");
+const Comment = require("../../models/comment");
 
 // Create a like
 createLike = async (req, res) => {
@@ -8,9 +10,9 @@ createLike = async (req, res) => {
     // Check if like already exists by the user
     let isLiked;
 
-    if (req.query.on === 'Post') {
+    if (req.query.on === "Post") {
       const post = await Post.findById(req.query.id).populate({
-        path: 'likes',
+        path: "likes",
         select: { _id: 1, createdBy: 1 },
       });
       isLiked = false;
@@ -20,11 +22,11 @@ createLike = async (req, res) => {
         }
       });
       if (isLiked) {
-        res.status(200).json({ message: 'Already liked post', success: true });
+        res.status(200).json({ message: "Already liked post", success: true });
       }
-    } else if (req.query.on === 'Comment') {
+    } else if (req.query.on === "Comment") {
       const comment = await Comment.findById(req.query.id).populate({
-        path: 'likes',
+        path: "likes",
         select: { _id: 1, createdBy: 1 },
       });
       isLiked = false;
@@ -36,7 +38,7 @@ createLike = async (req, res) => {
       if (isLiked) {
         res
           .status(200)
-          .json({ message: 'Already liked comment', success: true });
+          .json({ message: "Already liked comment", success: true });
       }
     }
 
@@ -51,12 +53,12 @@ createLike = async (req, res) => {
       like.save();
 
       // Insert like in post or the comment
-      if (req.query.on === 'Post') {
+      if (req.query.on === "Post") {
         const post = await Post.findById(req.query.id);
 
         post.likes.push(like._id);
         await post.save();
-      } else if (req.query.on === 'Comment') {
+      } else if (req.query.on === "Comment") {
         const comment = await Comment.findById(req.query.id);
 
         comment.likes.push(like._id);
@@ -64,23 +66,23 @@ createLike = async (req, res) => {
       }
 
       // Success response
-      res.status(200).json({ message: 'Like created', success: true });
+      res.status(200).json({ message: "Like created", success: true });
     }
   } catch (err) {
     // Failure response
     console.log(err);
-    res.status(500).json({ message: 'Internal Server Error', success: false });
+    res.status(500).json({ message: "Internal Server Error", success: false });
   }
 };
 
 unlike = async (req, res) => {
   try {
-    if (req.query.on === 'Post') {
+    if (req.query.on === "Post") {
       // Delete like on post
       const post = await Post.findById(req.query.id).populate({
-        path: 'likes',
+        path: "likes",
         populate: {
-          path: 'createdBy',
+          path: "createdBy",
           select: { _id: 1 },
         },
         select: { _id: 1 },
@@ -96,12 +98,12 @@ unlike = async (req, res) => {
 
       // Delete like document for post
       await Like.findByIdAndDelete(likeId);
-    } else if (req.query.on === 'Comment') {
+    } else if (req.query.on === "Comment") {
       // Delete like on comment
       const comment = await Comment.findById(req.query.id).populate({
-        path: 'likes',
+        path: "likes",
         populate: {
-          path: 'createdBy',
+          path: "createdBy",
           select: { _id: 1 },
         },
         select: { _id: 1 },
@@ -119,13 +121,13 @@ unlike = async (req, res) => {
       await Like.findByIdAndDelete(likeId);
     }
     // Success response
-    return res.status(200).json({ message: 'Unliked', success: true });
+    return res.status(200).json({ message: "Unliked", success: true });
   } catch (err) {
     // Failure response
     console.log(err);
     return res
       .status(500)
-      .json({ message: 'Internal Server Error', success: false });
+      .json({ message: "Internal Server Error", success: false });
   }
 };
 

@@ -1,5 +1,7 @@
-const Post = require('../../models/post');
-const Comment = require('../../models/comment');
+/* --------------------------- Comments Controller -------------------------- */
+
+const Post = require("../../models/post");
+const Comment = require("../../models/comment");
 
 // Create a comment
 createComment = async (req, res) => {
@@ -21,10 +23,10 @@ createComment = async (req, res) => {
         console.log(err);
       });
 
-    res.status(200).json({ message: 'Comment created', success: true });
+    res.status(200).json({ message: "Comment created", success: true });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: 'Internal Server Error', success: false });
+    res.status(500).json({ message: "Internal Server Error", success: false });
   }
 };
 
