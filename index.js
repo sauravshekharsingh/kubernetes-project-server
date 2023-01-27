@@ -1,23 +1,25 @@
-const express = require('express');
+/* ---------------------------- Entry point file ---------------------------- */
+
+const express = require("express");
 const app = express();
-const dotenv = require('dotenv');
-const passport = require('passport');
-const db = require('./config/mongoose');
-const cors = require('cors');
+const dotenv = require("dotenv");
+const passport = require("passport");
+const db = require("./config/mongoose");
+const cors = require("cors");
 app.use(cors());
 
 // dotenv
 dotenv.config();
 
 // Passport
-require('./config/passport');
+require("./config/passport");
 app.use(passport.initialize());
 
 // Body parser
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.use('/', require('./routes'));
+app.use("/", require("./routes"));
 
 // Server
 const PORT = process.env.PORT || 8000;
