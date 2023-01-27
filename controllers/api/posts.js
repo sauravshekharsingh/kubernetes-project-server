@@ -1,6 +1,8 @@
-const Post = require('../../models/post');
-const Comment = require('../../models/comment');
-const Like = require('../../models/like');
+/* ---------------------------- Posts controller ---------------------------- */
+
+const Post = require("../../models/post");
+const Comment = require("../../models/comment");
+const Like = require("../../models/like");
 
 // Fetch all posts
 fetchPosts = async (req, res) => {
@@ -9,21 +11,21 @@ fetchPosts = async (req, res) => {
       .sort({ createdAt: -1 })
       .populate([
         {
-          path: 'createdBy',
+          path: "createdBy",
           select: { _id: 1, username: 1, name: 1 },
         },
         {
-          path: 'likes',
+          path: "likes",
           populate: {
-            path: 'createdBy',
+            path: "createdBy",
             select: { _id: 1, username: 1, name: 1 },
           },
           select: { _id: 1, createdBy: 1 },
         },
         {
-          path: 'comments',
+          path: "comments",
           populate: {
-            path: 'createdBy',
+            path: "createdBy",
             select: { _id: 1, username: 1, name: 1 },
           },
         },
@@ -34,7 +36,7 @@ fetchPosts = async (req, res) => {
     console.log(err);
     return res
       .status(500)
-      .json({ message: 'Internal Server Error', success: false });
+      .json({ message: "Internal Server Error", success: false });
   }
 };
 
@@ -47,12 +49,12 @@ createPost = async (req, res) => {
     });
 
     await post.save();
-    return res.status(200).json({ message: 'Post created', success: true });
+    return res.status(200).json({ message: "Post created", success: true });
   } catch (err) {
     console.log(err);
     return res
       .status(500)
-      .json({ message: 'Internal Server Error', success: false });
+      .json({ message: "Internal Server Error", success: false });
   }
 };
 
@@ -67,12 +69,12 @@ deletePost = async (req, res) => {
     await Comment.deleteMany({ onPost: req.query.postId });
     await Like.deleteMany({ onPostOrComment: req.query.postId });
 
-    return res.status(200).json({ message: 'Post deleted', success: true });
+    return res.status(200).json({ message: "Post deleted", success: true });
   } catch (err) {
     console.log(err);
     return res
       .status(500)
-      .json({ message: 'Internal Server Error', success: false });
+      .json({ message: "Internal Server Error", success: false });
   }
 };
 
