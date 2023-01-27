@@ -1,4 +1,6 @@
-const mongoose = require('mongoose');
+/* ------------------------------- Post model ------------------------------- */
+
+const mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema(
   {
@@ -9,20 +11,20 @@ const postSchema = new mongoose.Schema(
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'User',
+      ref: "User",
     },
     likes: [
       {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'Like',
+        ref: "Like",
       },
     ],
     comments: [
       {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'Comment',
+        ref: "Comment",
       },
     ],
   },
@@ -31,6 +33,6 @@ const postSchema = new mongoose.Schema(
   }
 );
 
-const Post = mongoose.model('Post', postSchema);
+const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;
