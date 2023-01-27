@@ -1,24 +1,26 @@
-const express = require('express');
-const router = express.Router();
-const passport = require('passport');
+/* ------------------------------ Posts routes ------------------------------ */
 
-const postsController = require('../../controllers/api/posts');
+const express = require("express");
+const router = express.Router();
+const passport = require("passport");
+
+const postsController = require("../../controllers/api/posts");
 
 router.get(
-  '/',
-  passport.authenticate('jwt', { session: false }),
+  "/",
+  passport.authenticate("jwt", { session: false }),
   postsController.fetchPosts
 );
 
 router.post(
-  '/create',
-  passport.authenticate('jwt', { session: false }),
+  "/create",
+  passport.authenticate("jwt", { session: false }),
   postsController.createPost
 );
 
 router.post(
-  '/delete',
-  passport.authenticate('jwt', { session: false }),
+  "/delete",
+  passport.authenticate("jwt", { session: false }),
   postsController.deletePost
 );
 
